@@ -63,7 +63,7 @@ async function bootstrap() {
     ],
     dateScalarMode: "isoDate",
     authChecker: customAuthChecker,
-    // globalMiddlewares: [IsBoardMember],
+    globalMiddlewares: [IsBoardMember],
     emitSchemaFile: true,
     pubSub: pubSub,
   });
@@ -79,7 +79,7 @@ async function bootstrap() {
             return { uid: user.id };
           });
         }
-        // throw new Error("User not authenticated");
+        throw new Error("User not authenticated");
       },
     },
     context: (ctx: MyContext) => getContext(ctx),
@@ -104,7 +104,7 @@ async function bootstrap() {
   });
 
   restRoutes.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/vue-client/build/index.html"));
+    res.sendFile(path.join(__dirname + "../vue-client/build/index.html"));
   });
 
   app.use("*", restRoutes);

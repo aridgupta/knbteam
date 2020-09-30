@@ -1,8 +1,10 @@
-import gql from 'graphql-tag';
-import * as VueApolloComposable from '@vue/apollo-composable';
-import * as VueCompositionApi from 'vue';
+import gql from "graphql-tag";
+import * as VueApolloComposable from "@vue/apollo-composable";
+import * as VueCompositionApi from "vue";
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
 export type ReactiveFunction<TParam> = () => TParam;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -16,7 +18,7 @@ export type Scalars = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   currentUser: User;
   boards: Array<Board>;
   boardOne: Board;
@@ -28,89 +30,81 @@ export type Query = {
   cardAssignees: Array<User>;
 };
 
-
 export type QueryBoardOneArgs = {
-  id: Scalars['String'];
+  id: Scalars["String"];
 };
-
 
 export type QueryBoardMembersArgs = {
-  boardId: Scalars['String'];
+  boardId: Scalars["String"];
 };
-
 
 export type QueryStacksArgs = {
-  boardId: Scalars['String'];
+  boardId: Scalars["String"];
 };
-
 
 export type QueryStackOneArgs = {
-  stackId: Scalars['String'];
+  stackId: Scalars["String"];
 };
-
 
 export type QueryCardsArgs = {
-  stackId: Scalars['String'];
+  stackId: Scalars["String"];
 };
-
 
 export type QueryCardOneArgs = {
-  cardId: Scalars['String'];
+  cardId: Scalars["String"];
 };
 
-
 export type QueryCardAssigneesArgs = {
-  cardId: Scalars['String'];
+  cardId: Scalars["String"];
 };
 
 export type User = {
-  __typename?: 'User';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  __typename?: "User";
+  id: Scalars["String"];
+  name: Scalars["String"];
+  email: Scalars["String"];
+  createdAt: Scalars["DateTime"];
   boards: Array<Board>;
 };
 
-
 export type Board = {
-  __typename?: 'Board';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  ownerId: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
+  __typename?: "Board";
+  id: Scalars["ID"];
+  name: Scalars["String"];
+  ownerId: Scalars["String"];
+  createdAt: Scalars["DateTime"];
+  updatedAt?: Maybe<Scalars["DateTime"]>;
   owner: User;
   members: Array<User>;
   stacks: Array<Stack>;
 };
 
 export type Stack = {
-  __typename?: 'Stack';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  boardId: Scalars['String'];
+  __typename?: "Stack";
+  id: Scalars["ID"];
+  name: Scalars["String"];
+  createdAt: Scalars["DateTime"];
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+  boardId: Scalars["String"];
   board: Board;
   cards: Array<Card>;
 };
 
 export type Card = {
-  __typename?: 'Card';
-  id: Scalars['ID'];
-  title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  position: Scalars['Int'];
-  createdAt: Scalars['DateTime'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  stackId: Scalars['String'];
+  __typename?: "Card";
+  id: Scalars["ID"];
+  title: Scalars["String"];
+  description?: Maybe<Scalars["String"]>;
+  position: Scalars["Int"];
+  createdAt: Scalars["DateTime"];
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+  stackId: Scalars["String"];
   stack: Stack;
   assignees: Array<User>;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   signup: AuthResponse;
   login: AuthResponse;
   createBoard: Board;
@@ -128,137 +122,122 @@ export type Mutation = {
   deleteCardAssignee: DeletePayload;
 };
 
-
 export type MutationSignupArgs = {
   data: SignupInput;
 };
-
 
 export type MutationLoginArgs = {
   data: LoginInput;
 };
 
-
 export type MutationCreateBoardArgs = {
-  name: Scalars['String'];
+  name: Scalars["String"];
 };
-
 
 export type MutationUpdateBoardArgs = {
   input: BoardInput;
 };
 
-
 export type MutationDeleteBoardArgs = {
-  boardId: Scalars['String'];
+  boardId: Scalars["String"];
 };
-
 
 export type MutationCreateBoardMemberArgs = {
-  memberId: Scalars['String'];
-  boardId: Scalars['String'];
+  memberId: Scalars["String"];
+  boardId: Scalars["String"];
 };
-
 
 export type MutationDeleteBoardMemberArgs = {
-  memberId: Scalars['String'];
-  boardId: Scalars['String'];
+  memberId: Scalars["String"];
+  boardId: Scalars["String"];
 };
-
 
 export type MutationCreateStackArgs = {
-  name: Scalars['String'];
-  boardId: Scalars['String'];
+  name: Scalars["String"];
+  boardId: Scalars["String"];
 };
-
 
 export type MutationUpdateStackArgs = {
   input: StackInput;
 };
 
-
 export type MutationDeleteStackArgs = {
-  stackId: Scalars['String'];
+  stackId: Scalars["String"];
 };
-
 
 export type MutationCreateCardArgs = {
-  title: Scalars['String'];
-  stackId: Scalars['String'];
+  title: Scalars["String"];
+  stackId: Scalars["String"];
 };
-
 
 export type MutationUpdateCardArgs = {
   input: CardInput;
 };
 
-
 export type MutationDeleteCardArgs = {
-  cardId: Scalars['String'];
+  cardId: Scalars["String"];
 };
-
 
 export type MutationCreateCardAssigneeArgs = {
-  assigneeId: Scalars['String'];
-  cardId: Scalars['String'];
+  assigneeId: Scalars["String"];
+  cardId: Scalars["String"];
 };
 
-
 export type MutationDeleteCardAssigneeArgs = {
-  assigneeId: Scalars['String'];
-  cardId: Scalars['String'];
+  assigneeId: Scalars["String"];
+  cardId: Scalars["String"];
 };
 
 export type AuthResponse = {
-  __typename?: 'AuthResponse';
+  __typename?: "AuthResponse";
   user: User;
-  token: Scalars['String'];
+  token: Scalars["String"];
 };
 
 export type SignupInput = {
-  name: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
+  name: Scalars["String"];
+  email: Scalars["String"];
+  password: Scalars["String"];
 };
 
 export type LoginInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  password: Scalars["String"];
 };
 
 export type BoardInput = {
-  boardId: Scalars['String'];
-  name: Scalars['String'];
+  boardId: Scalars["String"];
+  name: Scalars["String"];
 };
 
 export type DeletePayload = {
-  __typename?: 'DeletePayload';
-  id: Scalars['String'];
+  __typename?: "DeletePayload";
+  id: Scalars["String"];
 };
 
 export type BoardMember = {
-  __typename?: 'BoardMember';
-  boardId: Scalars['String'];
+  __typename?: "BoardMember";
+  boardId: Scalars["String"];
   board: Board;
-  memberId: Scalars['String'];
+  memberId: Scalars["String"];
   member: User;
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars["DateTime"];
 };
 
 export type StackInput = {
-  stackId: Scalars['String'];
-  name: Scalars['String'];
+  stackId: Scalars["String"];
+  name: Scalars["String"];
 };
 
 export type CardInput = {
-  cardId: Scalars['String'];
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  newPosition?: Maybe<Scalars['Int']>;
+  cardId: Scalars["String"];
+  title?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars["String"]>;
+  newPosition?: Maybe<Scalars["Int"]>;
 };
 
 export type Subscription = {
-  __typename?: 'Subscription';
+  __typename?: "Subscription";
   boardCreateOrUpdateNotification: BoardCreateOrUpdateNotification;
   deleteBoardNotification: DeletePayload;
   stackCreateOrUpdateNotification: StackCreateOrUpdateNotification;
@@ -267,110 +246,87 @@ export type Subscription = {
   deleteCardNotification: DeletePayload;
 };
 
-
 export type SubscriptionDeleteBoardNotificationArgs = {
-  boardId: Scalars['String'];
+  boardId: Scalars["String"];
 };
-
 
 export type SubscriptionStackCreateOrUpdateNotificationArgs = {
-  boardId: Scalars['String'];
+  boardId: Scalars["String"];
 };
-
 
 export type SubscriptionDeleteStackNotificationArgs = {
-  stackId: Scalars['String'];
+  stackId: Scalars["String"];
 };
-
 
 export type SubscriptionCardCreateOrUpdateNotificationArgs = {
-  stackId: Scalars['String'];
+  stackId: Scalars["String"];
 };
 
-
 export type SubscriptionDeleteCardNotificationArgs = {
-  cardId: Scalars['String'];
+  cardId: Scalars["String"];
 };
 
 export type BoardCreateOrUpdateNotification = {
-  __typename?: 'BoardCreateOrUpdateNotification';
-  action: Scalars['String'];
+  __typename?: "BoardCreateOrUpdateNotification";
+  action: Scalars["String"];
   board: Board;
 };
 
 export type StackCreateOrUpdateNotification = {
-  __typename?: 'StackCreateOrUpdateNotification';
-  action: Scalars['String'];
+  __typename?: "StackCreateOrUpdateNotification";
+  action: Scalars["String"];
   stack: Stack;
 };
 
 export type CardCreateOrUpdateNotification = {
-  __typename?: 'CardCreateOrUpdateNotification';
-  action: Scalars['String'];
+  __typename?: "CardCreateOrUpdateNotification";
+  action: Scalars["String"];
   card: Card;
 };
 
 export type LoginMutationVariables = Exact<{
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
-
-export type LoginMutation = (
-  { __typename?: 'Mutation' }
-  & { login: (
-    { __typename?: 'AuthResponse' }
-    & Pick<AuthResponse, 'token'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email'>
-    ) }
-  ) }
-);
+export type LoginMutation = { __typename?: "Mutation" } & {
+  login: { __typename?: "AuthResponse" } & Pick<AuthResponse, "token"> & {
+      user: { __typename?: "User" } & Pick<User, "id" | "name" | "email">;
+    };
+};
 
 export type SignupMutationVariables = Exact<{
-  name: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
+  name: Scalars["String"];
+  email: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
+export type SignupMutation = { __typename?: "Mutation" } & {
+  signup: { __typename?: "AuthResponse" } & Pick<AuthResponse, "token"> & {
+      user: { __typename?: "User" } & Pick<User, "id" | "name" | "email">;
+    };
+};
 
-export type SignupMutation = (
-  { __typename?: 'Mutation' }
-  & { signup: (
-    { __typename?: 'AuthResponse' }
-    & Pick<AuthResponse, 'token'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email'>
-    ) }
-  ) }
-);
+export type AllBoardsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AllBoardsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllBoardsQuery = (
-  { __typename?: 'Query' }
-  & { boards: Array<(
-    { __typename?: 'Board' }
-    & Pick<Board, 'id' | 'name' | 'ownerId'>
-  )> }
-);
-
+export type AllBoardsQuery = { __typename?: "Query" } & {
+  boards: Array<
+    { __typename?: "Board" } & Pick<Board, "id" | "name" | "ownerId">
+  >;
+};
 
 export const LoginDocument = gql`
-    mutation login($email: String!, $password: String!) {
-  login(data: {email: $email, password: $password}) {
-    user {
-      id
-      name
-      email
+  mutation login($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      user {
+        id
+        name
+        email
+      }
+      token
     }
-    token
   }
-}
-    `;
+`;
 
 /**
  * __useLoginMutation__
@@ -390,22 +346,40 @@ export const LoginDocument = gql`
  *   },
  * });
  */
-export function useLoginMutation(options: VueApolloComposable.UseMutationOptions<LoginMutation, LoginMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<LoginMutation, LoginMutationVariables>>) {
-            return VueApolloComposable.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-          }
-export type LoginMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<LoginMutation, LoginMutationVariables>;
-export const SignupDocument = gql`
-    mutation signup($name: String!, $email: String!, $password: String!) {
-  signup(data: {name: $name, email: $email, password: $password}) {
-    user {
-      id
-      name
-      email
-    }
-    token
-  }
+export function useLoginMutation(
+  options:
+    | VueApolloComposable.UseMutationOptions<
+        LoginMutation,
+        LoginMutationVariables
+      >
+    | ReactiveFunction<
+        VueApolloComposable.UseMutationOptions<
+          LoginMutation,
+          LoginMutationVariables
+        >
+      >
+) {
+  return VueApolloComposable.useMutation<LoginMutation, LoginMutationVariables>(
+    LoginDocument,
+    options
+  );
 }
-    `;
+export type LoginMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<
+  LoginMutation,
+  LoginMutationVariables
+>;
+export const SignupDocument = gql`
+  mutation signup($name: String!, $email: String!, $password: String!) {
+    signup(data: { name: $name, email: $email, password: $password }) {
+      user {
+        id
+        name
+        email
+      }
+      token
+    }
+  }
+`;
 
 /**
  * __useSignupMutation__
@@ -426,19 +400,37 @@ export const SignupDocument = gql`
  *   },
  * });
  */
-export function useSignupMutation(options: VueApolloComposable.UseMutationOptions<SignupMutation, SignupMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<SignupMutation, SignupMutationVariables>>) {
-            return VueApolloComposable.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument, options);
-          }
-export type SignupMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<SignupMutation, SignupMutationVariables>;
-export const AllBoardsDocument = gql`
-    query allBoards {
-  boards {
-    id
-    name
-    ownerId
-  }
+export function useSignupMutation(
+  options:
+    | VueApolloComposable.UseMutationOptions<
+        SignupMutation,
+        SignupMutationVariables
+      >
+    | ReactiveFunction<
+        VueApolloComposable.UseMutationOptions<
+          SignupMutation,
+          SignupMutationVariables
+        >
+      >
+) {
+  return VueApolloComposable.useMutation<
+    SignupMutation,
+    SignupMutationVariables
+  >(SignupDocument, options);
 }
-    `;
+export type SignupMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<
+  SignupMutation,
+  SignupMutationVariables
+>;
+export const AllBoardsDocument = gql`
+  query allBoards {
+    boards {
+      id
+      name
+      ownerId
+    }
+  }
+`;
 
 /**
  * __useAllBoardsQuery__
@@ -455,7 +447,32 @@ export const AllBoardsDocument = gql`
  *   }
  * );
  */
-export function useAllBoardsQuery(options: VueApolloComposable.UseQueryOptions<AllBoardsQuery, AllBoardsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<AllBoardsQuery, AllBoardsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<AllBoardsQuery, AllBoardsQueryVariables>> = {}) {
-            return VueApolloComposable.useQuery<AllBoardsQuery, undefined>(AllBoardsDocument, undefined, options);
-          }
-export type AllBoardsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<AllBoardsQuery, AllBoardsQueryVariables>;
+export function useAllBoardsQuery(
+  options:
+    | VueApolloComposable.UseQueryOptions<
+        AllBoardsQuery,
+        AllBoardsQueryVariables
+      >
+    | VueCompositionApi.Ref<
+        VueApolloComposable.UseQueryOptions<
+          AllBoardsQuery,
+          AllBoardsQueryVariables
+        >
+      >
+    | ReactiveFunction<
+        VueApolloComposable.UseQueryOptions<
+          AllBoardsQuery,
+          AllBoardsQueryVariables
+        >
+      > = {}
+) {
+  return VueApolloComposable.useQuery<AllBoardsQuery, undefined>(
+    AllBoardsDocument,
+    undefined,
+    options
+  );
+}
+export type AllBoardsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<
+  AllBoardsQuery,
+  AllBoardsQueryVariables
+>;

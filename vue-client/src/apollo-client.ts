@@ -4,13 +4,13 @@ import {
   split,
   concat,
   ApolloClient,
-  InMemoryCache,
+  InMemoryCache
 } from "apollo-boost";
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 
 const httpLink = new HttpLink({
-  uri: "http://192.168.31.175:4000/api",
+  uri: "http://192.168.31.175:4000/api"
 });
 
 const wsLink = new WebSocketLink({
@@ -19,9 +19,9 @@ const wsLink = new WebSocketLink({
     lazy: true,
     reconnect: true,
     connectionParams: () => ({
-      authToken: `${localStorage.getItem("jtk") || ""}`,
-    }),
-  },
+      authToken: `${localStorage.getItem("jtk") || ""}`
+    })
+  }
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -30,8 +30,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   if (!token) return forward(operation);
   operation.setContext({
     headers: {
-      authorization: `Bearer ${localStorage.getItem("jtk") || ""}`,
-    },
+      authorization: `Bearer ${localStorage.getItem("jtk") || ""}`
+    }
   });
 
   return forward(operation);
@@ -52,5 +52,5 @@ const splitLink = split(
 export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: splitLink,
-  connectToDevTools: true,
+  connectToDevTools: true
 });

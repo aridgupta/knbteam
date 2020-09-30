@@ -37,11 +37,11 @@ async function bootstrap() {
     entities: ["./entity/*.*"],
     migrations: ["migration/*.js"],
     cli: {
-      migrationsDir: "migration",
-    },
+      migrationsDir: "migration"
+    }
   });
   const client = new Client({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL
   });
   await client.connect();
   const pubSub = new PostgresPubSub(client);
@@ -59,13 +59,13 @@ async function bootstrap() {
       CardQueries,
       CardMutations,
       CardAssigneeMutations,
-      CardAssigneeQueries,
+      CardAssigneeQueries
     ],
     dateScalarMode: "isoDate",
     authChecker: customAuthChecker,
     globalMiddlewares: [IsBoardMember],
     emitSchemaFile: true,
-    pubSub: pubSub,
+    pubSub: pubSub
   });
 
   const server = new ApolloServer({
@@ -80,9 +80,9 @@ async function bootstrap() {
           });
         }
         throw new Error("User not authenticated");
-      },
+      }
     },
-    context: (ctx: MyContext) => getContext(ctx),
+    context: (ctx: MyContext) => getContext(ctx)
   });
   const PORT = (process.env.PORT as string) || 4000;
   const app = Express();
@@ -95,12 +95,12 @@ async function bootstrap() {
     app,
     path: "/api",
     bodyParserConfig: {
-      limit: "50mb",
+      limit: "50mb"
     },
     cors: {
       origin: ["http://localhost:3000", "http://192.168.31.175:3000"],
-      credentials: true,
-    },
+      credentials: true
+    }
   });
 
   restRoutes.get("*", (req, res) => {

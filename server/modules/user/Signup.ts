@@ -14,22 +14,25 @@ export class Signup {
     @Arg("data", () => SignupInput) { name, email, password }: SignupInput,
     @Ctx() { res }: MyContext
   ): Promise<AuthResponse> {
+    if (password.length < 8)
+      throw new Error("Password must be of at least 8 characters");
     const hashedPassword = await hash(password, 11);
+
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password: hashedPassword
     }).save();
 
     const token = sign({ id: user.id }, "paPN6aHEGIhL^CPh$kD@S33R2YmW#MFB", {
-      expiresIn: "1h",
+      expiresIn: "1h"
     });
 
     const refreshToken = sign(
       { id: user.id },
       "paPN6aHEGIhL^CPh$kD@S33R2YmW#MFB",
       {
-        expiresIn: "1h",
+        expiresIn: "1h"
       }
     );
 
@@ -38,7 +41,7 @@ export class Signup {
       cookie.serialize("urt", refreshToken, {
         httpOnly: true,
         secure: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60
       })
     );
 

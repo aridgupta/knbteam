@@ -26,6 +26,7 @@ require("dotenv").config();
 import PostgresPubSub from "@udia/graphql-postgres-subscriptions";
 import { Client } from "pg";
 import { IsBoardMember } from "./utils/IsBoardMember";
+import { ErrorHandler } from "./utils/ErrorHandler";
 
 async function bootstrap() {
   await createConnection({
@@ -63,7 +64,7 @@ async function bootstrap() {
     ],
     dateScalarMode: "isoDate",
     authChecker: customAuthChecker,
-    globalMiddlewares: [IsBoardMember],
+    globalMiddlewares: [ErrorHandler, IsBoardMember],
     emitSchemaFile: true,
     pubSub: pubSub
   });
@@ -98,7 +99,7 @@ async function bootstrap() {
       limit: "50mb"
     },
     cors: {
-      origin: ["http://localhost:3000", "http://192.168.31.175:3000"],
+      origin: ["http://localhost:8080", "http://192.168.31.175:8080"],
       credentials: true
     }
   });

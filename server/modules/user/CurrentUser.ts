@@ -4,7 +4,7 @@ import {
   Authorized,
   Resolver,
   FieldResolver,
-  Root,
+  Root
 } from "type-graphql";
 import MyContext from "../../types/context";
 import { User } from "../../entity/User";
@@ -25,7 +25,7 @@ export class CurrentUser {
     @Ctx() { uid }: MyContext
   ): Promise<Board[]> {
     const bms = await BoardMember.find({
-      where: { memberId: parent.id },
+      where: { memberId: parent.id }
     });
     let boards: Board[] = [];
     const res = bms.filter((bm) => bm.memberId === uid);

@@ -23,14 +23,14 @@ export class Login {
     if (!matchedPassword) throw new Error("Invalid password");
 
     const token = sign({ id: user.id }, "paPN6aHEGIhL^CPh$kD@S33R2YmW#MFB", {
-      expiresIn: "1h",
+      expiresIn: "1h"
     });
 
     const refreshToken = sign(
       { id: user.id },
       "paPN6aHEGIhL^CPh$kD@S33R2YmW#MFB",
       {
-        expiresIn: "1h",
+        expiresIn: "1h"
       }
     );
 
@@ -39,7 +39,7 @@ export class Login {
       cookie.serialize("urt", refreshToken, {
         httpOnly: true,
         secure: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60
       })
     );
 

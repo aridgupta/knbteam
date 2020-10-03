@@ -2,25 +2,18 @@
   <router-view />
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent, provide } from "vue";
+import useAuth from "./compositions/useAuth";
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default defineComponent({
+  name: "App",
+  setup() {
+    const { auth, login, signup, authError } = useAuth();
+    provide("auth", auth);
+    provide("signup", signup);
+    provide("login", login);
+    provide("authError", authError);
+  }
+});
+</script>

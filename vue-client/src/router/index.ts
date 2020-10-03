@@ -1,11 +1,27 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
+import Signup from "../views/Signup.vue";
+import Login from "../views/Login.vue";
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: "/signup",
+        name: "signup",
+        component: Signup,
+        meta: {
+          showModal: true
+        }
+      },
+      {
+        path: "/login",
+        name: "login",
+        component: Login
+      }
+    ]
   }
 ];
 
